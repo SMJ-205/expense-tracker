@@ -401,7 +401,7 @@ export default function HomePage() {
                 className="btn btn-primary" 
                 style={{ position: 'relative', padding: '24px', fontSize: '1.1rem', height: 'auto', display: 'flex', flexDirection: 'column', gap: '12px', width: '100%', overflow: 'hidden', alignItems: 'center' }}
               >
-                <img src="/camera-icon.png" alt="Camera" style={{ width: '80px', height: '80px', objectFit: 'contain' }} />
+                <img src="/camera-icon.png" alt="Camera" style={{ width: '200px', height: '200px', objectFit: 'contain' }} />
                 <span>Use Camera</span>
                 <input
                   ref={cameraInputRef}
