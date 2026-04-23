@@ -387,50 +387,45 @@ export default function HomePage() {
             </div>
           )}
 
-          {/* Upload Zone */}
+          {/* Upload Actions */}
           {!imagePreview && (
             <div
-              className={`upload-zone ${isDragging ? 'dragging' : ''}`}
+              className={`upload-actions ${isDragging ? 'dragging' : ''}`}
               onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
               onDragLeave={() => setIsDragging(false)}
               onDrop={handleDrop}
-              style={{ border: 'none', background: 'transparent', padding: 'var(--space-md) 0' }}
+              style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)', padding: 'var(--space-md) 0' }}
             >
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
-                <button 
-                  className="btn btn-primary" 
-                  style={{ padding: '24px', fontSize: '1.1rem', height: 'auto', display: 'flex', flexDirection: 'column', gap: '12px', width: '100%' }}
-                  onClick={() => cameraInputRef.current?.click()}
-                >
-                  <span style={{ fontSize: '2.5rem' }}>📷</span>
-                  <span>Use Camera</span>
-                </button>
-                
-                <button 
-                  className="btn btn-secondary" 
-                  style={{ padding: '16px', display: 'flex', gap: '8px', justifyContent: 'center', width: '100%' }}
-                  onClick={() => galleryInputRef.current?.click()}
-                >
-                  <span style={{ fontSize: '1.2rem' }}>🖼️</span>
-                  <span>Load from Gallery</span>
-                </button>
-              </div>
-
-              <input
-                ref={cameraInputRef}
-                type="file"
-                accept="image/*"
-                capture="environment"
-                onChange={(e) => handleImageSelect(e.target.files?.[0])}
-                style={{ display: 'none' }}
-              />
-              <input
-                ref={galleryInputRef}
-                type="file"
-                accept="image/*"
-                onChange={(e) => handleImageSelect(e.target.files?.[0])}
-                style={{ display: 'none' }}
-              />
+              <button 
+                className="btn btn-primary" 
+                style={{ position: 'relative', padding: '24px', fontSize: '1.1rem', height: 'auto', display: 'flex', flexDirection: 'column', gap: '12px', width: '100%', overflow: 'hidden' }}
+              >
+                <span style={{ fontSize: '2.5rem' }}>📷</span>
+                <span>Use Camera</span>
+                <input
+                  ref={cameraInputRef}
+                  type="file"
+                  accept="image/*"
+                  capture="environment"
+                  onChange={(e) => handleImageSelect(e.target.files?.[0])}
+                  style={{ position: 'absolute', inset: 0, opacity: 0, cursor: 'pointer', width: '100%', height: '100%' }}
+                />
+              </button>
+              
+              <button 
+                className="btn btn-secondary" 
+                style={{ position: 'relative', padding: '16px', display: 'flex', gap: '8px', justifyContent: 'center', width: '100%', overflow: 'hidden' }}
+              >
+                <span style={{ fontSize: '1.2rem' }}>🖼️</span>
+                <span>Load from Gallery</span>
+                <input
+                  ref={galleryInputRef}
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => handleImageSelect(e.target.files?.[0])}
+                  style={{ position: 'absolute', inset: 0, opacity: 0, cursor: 'pointer', width: '100%', height: '100%' }}
+                />
+              </button>
             </div>
           )}
 
