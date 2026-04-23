@@ -34,7 +34,8 @@ export default function HomePage() {
   // Recent expenses
   const [recentExpenses, setRecentExpenses] = useState([]);
 
-  const fileInputRef = useRef(null);
+  const cameraInputRef = useRef(null);
+  const galleryInputRef = useRef(null);
 
   // Check for stored session
   useEffect(() => {
@@ -236,7 +237,8 @@ export default function HomePage() {
     setImagePreview(null);
     setParsedResult(null);
     setEditedFields(null);
-    if (fileInputRef.current) fileInputRef.current.value = '';
+    if (cameraInputRef.current) cameraInputRef.current.value = '';
+    if (galleryInputRef.current) galleryInputRef.current.value = '';
   };
 
   const updateField = (field, value) => {
@@ -392,16 +394,42 @@ export default function HomePage() {
               onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
               onDragLeave={() => setIsDragging(false)}
               onDrop={handleDrop}
+              style={{ border: 'none', background: 'transparent', padding: 'var(--space-md) 0' }}
             >
-              <span className="upload-zone-icon">📷</span>
-              <p className="upload-zone-text">Tap to Scan Receipt</p>
-              <p className="upload-zone-hint">or drag & drop an image</p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-md)' }}>
+                <button 
+                  className="btn btn-primary" 
+                  style={{ padding: '24px', fontSize: '1.1rem', height: 'auto', display: 'flex', flexDirection: 'column', gap: '12px', width: '100%' }}
+                  onClick={() => cameraInputRef.current?.click()}
+                >
+                  <span style={{ fontSize: '2.5rem' }}>📷</span>
+                  <span>Use Camera</span>
+                </button>
+                
+                <button 
+                  className="btn btn-secondary" 
+                  style={{ padding: '16px', display: 'flex', gap: '8px', justifyContent: 'center', width: '100%' }}
+                  onClick={() => galleryInputRef.current?.click()}
+                >
+                  <span style={{ fontSize: '1.2rem' }}>🖼️</span>
+                  <span>Load from Gallery</span>
+                </button>
+              </div>
+
               <input
-                ref={fileInputRef}
+                ref={cameraInputRef}
                 type="file"
                 accept="image/*"
                 capture="environment"
                 onChange={(e) => handleImageSelect(e.target.files?.[0])}
+                style={{ display: 'none' }}
+              />
+              <input
+                ref={galleryInputRef}
+                type="file"
+                accept="image/*"
+                onChange={(e) => handleImageSelect(e.target.files?.[0])}
+                style={{ display: 'none' }}
               />
             </div>
           )}
