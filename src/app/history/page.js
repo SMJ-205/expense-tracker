@@ -23,6 +23,11 @@ export default function HistoryPage() {
     }
   }, []);
 
+  const handleSignOut = () => {
+    sessionStorage.removeItem('expense_user');
+    setPin('');
+  };
+
   const fetchExpenses = async (userPin) => {
     setIsLoading(true);
     try {
@@ -99,6 +104,23 @@ export default function HistoryPage() {
       {/* Header */}
       <div className="history-header">
         <h1 className="history-title">Expense History</h1>
+        <button 
+          onClick={handleSignOut}
+          style={{ 
+            background: 'transparent', 
+            border: '1px solid var(--border)', 
+            color: 'var(--text-muted)', 
+            borderRadius: 'var(--radius-full)', 
+            padding: '4px 12px', 
+            fontSize: '0.75rem', 
+            cursor: 'pointer',
+            transition: 'all 0.2s'
+          }}
+          onMouseOver={(e) => { e.target.style.color = 'var(--text-primary)'; e.target.style.borderColor = 'var(--text-secondary)'; }}
+          onMouseOut={(e) => { e.target.style.color = 'var(--text-muted)'; e.target.style.borderColor = 'var(--border)'; }}
+        >
+          Sign Out
+        </button>
       </div>
 
       {/* Summary Cards */}

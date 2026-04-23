@@ -99,12 +99,18 @@ export default function HomePage() {
       // The actual validation happens server-side
       sessionStorage.setItem('expense_user', JSON.stringify({ pin, user: 'User' }));
       setUser('User');
-    } catch {
-      setAuthError('Login failed');
+    } catch (err) {
+      setAuthError('Invalid PIN or system error');
     }
   };
 
-  // ─── Image Upload ────────────────────────────────────────────
+  const handleSignOut = () => {
+    sessionStorage.removeItem('expense_user');
+    setUser(null);
+    setPin('');
+  };
+
+  // ─── Main Flow ───────────────────────────────────────────────
 
   const handleImageSelect = useCallback((file) => {
     if (!file) return;
@@ -320,8 +326,27 @@ export default function HomePage() {
       <header className="app-header">
         <h1 className="app-logo">Expense Tracker</h1>
         <p className="app-subtitle">Snap • Parse • Track</p>
-        <div className="user-badge">
-          👤 {user}
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '12px', marginTop: '12px' }}>
+          <div className="user-badge" style={{ marginTop: 0 }}>
+            👤 {user}
+          </div>
+          <button 
+            onClick={handleSignOut}
+            style={{ 
+              background: 'transparent', 
+              border: '1px solid var(--border)', 
+              color: 'var(--text-muted)', 
+              borderRadius: 'var(--radius-full)', 
+              padding: '4px 12px', 
+              fontSize: '0.75rem', 
+              cursor: 'pointer',
+              transition: 'all 0.2s'
+            }}
+            onMouseOver={(e) => { e.target.style.color = 'var(--text-primary)'; e.target.style.borderColor = 'var(--text-secondary)'; }}
+            onMouseOut={(e) => { e.target.style.color = 'var(--text-muted)'; e.target.style.borderColor = 'var(--border)'; }}
+          >
+            Sign Out
+          </button>
         </div>
       </header>
 
