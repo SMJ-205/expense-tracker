@@ -201,16 +201,17 @@ export default function HomePage() {
 
     setIsSaving(true);
     try {
+      const formData = new FormData();
+      formData.append('receipt_id', parsedResult.receipt_id);
+      formData.append('submitter', parsedResult.submitter || user);
+      formData.append('confirmed_fields', JSON.stringify(editedFields));
+      if (selectedImage) {
+        formData.append('image', selectedImage);
+      }
+
       const res = await fetch('/api/upload/confirm', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          receipt_id: parsedResult.receipt_id,
-          submitter: parsedResult.submitter || user,
-          confirmed_fields: editedFields,
-          image_base64: parsedResult.imageBase64,
-          image_mime_type: parsedResult.imageMimeType,
-        }),
+        body: formData,
       });
 
       const data = await res.json();

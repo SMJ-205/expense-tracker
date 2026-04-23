@@ -12,21 +12,20 @@ import { logInfo, logError } from '@/lib/logger';
 
 export async function POST(request) {
   try {
-    const body = await request.json();
-    const {
-      receipt_id,
-      submitter,
-      confirmed_fields,
-      image_base64,
-      image_mime_type,
-    } = body;
+    const formData = await request.formData();
+    const receipt_id = formData.get('receipt_id');
+    const submitter = formData.get('submitter');
+    const confirmed_fields_str = formData.get('confirmed_fields');
+    const imageFile = formData.get('image');
 
-    if (!receipt_id || !confirmed_fields) {
+    if (!receipt_id || !confirmed_fields_str) {
       return NextResponse.json(
         { error: 'Missing required fields: receipt_id, confirmed_fields' },
         { status: 400 }
       );
     }
+
+    const confirmed_fields = JSON.parse(confirmed_fields_str);
 
     // Check for duplicate
     const duplicate = await isDuplicate(receipt_id);
@@ -39,13 +38,13 @@ export async function POST(request) {
 
     // Upload image to Drive
     let imageUrl = '';
-    if (image_base64) {
+    if (imageFile && imageFile instanceof File) {
       try {
-        const imageBuffer = Buffer.from(image_base64, 'base64');
+        const imageBuffer = Buffer.from(await imageFile.arrayBuffer());
         const uploaded = await uploadImage(
           imageBuffer,
           receipt_id,
-          image_mime_type || 'image/jpeg'
+          imageFile.type || 'image/jpeg'
         );
         imageUrl = uploaded.fileUrl;
       } catch (driveErr) {

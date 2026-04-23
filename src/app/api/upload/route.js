@@ -138,8 +138,6 @@ export async function POST(request) {
       receipt_id: receiptId,
       submitter: user.name,
       parsed,
-      imageBase64: imageBuffer.toString('base64'),
-      imageMimeType: imageFile.type,
       quota: {
         used: updatedQuota.used,
         limit: updatedQuota.limit,
