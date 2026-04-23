@@ -278,7 +278,7 @@ export default function HomePage() {
     return (
       <div className="app-container">
         <div className="login-container">
-          <img src="/receipt-illustration.png" alt="Expense Tracker" style={{ width: '200px', height: 'auto', objectFit: 'contain' }} />
+          <img src="/receipt-illustration.png" alt="Expense Tracker" style={{ width: '240px', height: 'auto', objectFit: 'contain' }} />
           <h1 className="login-title">Expense Tracker</h1>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem' }}>
             Enter your PIN to continue
