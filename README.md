@@ -1,6 +1,6 @@
 # 🧾 Expense Tracker
 
-A mobile-first web app that automatically extracts expense data from receipt photos using OCR. Snap a photo, review the parsed fields, and save to Google Sheets — all from your phone.
+A "mobile" web app that automatically extracts expense data from receipt photos using OCR. Snap a photo, review the parsed fields, and save to Google Sheets — all from your phone.
 
 **Stack:** Next.js 16 · Vercel · Google Cloud Vision API · Google Sheets · Google Drive
 
