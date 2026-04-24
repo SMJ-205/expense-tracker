@@ -399,7 +399,7 @@ export default function HomePage() {
             >
               <button 
                 className="btn btn-primary" 
-                style={{ position: 'relative', padding: '6px', fontSize: '1.1rem', height: 'auto', display: 'flex', flexDirection: 'column', gap: '4px', width: '100%', overflow: 'hidden', alignItems: 'center' }}
+                style={{ position: 'relative', padding: '6px', fontSize: '1.1rem', height: 'auto', display: 'flex', flexDirection: 'column', gap: '4px', width: '60%', margin: '0 auto', overflow: 'hidden', alignItems: 'center' }}
               >
                 <img src="/camera-icon.png" alt="Camera" style={{ width: '200px', height: '200px', objectFit: 'contain' }} />
                 <span>Use Camera</span>
@@ -417,7 +417,6 @@ export default function HomePage() {
                 className="btn btn-secondary" 
                 style={{ position: 'relative', padding: '16px', display: 'flex', gap: '8px', justifyContent: 'center', width: '100%', overflow: 'hidden' }}
               >
-                <span style={{ fontSize: '1.2rem' }}>🖼️</span>
                 <span>Load from Gallery</span>
                 <input
                   ref={galleryInputRef}
